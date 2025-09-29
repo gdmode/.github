@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Timeline — Proof-Of Concept Physics Sandbox</title>
+  <style>
+    :root {
+      --bg: #478cbf;
+      --line: #e6eefb;
+      --accent: #1e88ff;
+      /* blue for current */
+      --muted: #7b8aa3;
+      --card-shadow: 0 6px 20px rgba(30, 40, 60, 0.06);
+      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: #fff;
+      font-family: var(--font-sans);
+      color: #233048;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px;
+    }
+
+    .card {
+      width: 1080px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(15, 30, 60, 0.04);
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .title h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* timeline container (we'll embed an SVG) */
+    .timeline-wrap {
+      display: block;
+      width: 100%;
+      height: 440px;
+      background: transparent;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      background: #fff;
+      padding: 16px 0 8px 0;
+      border-radius: 10px;
+    }
+
+    button {
+      border: 0;
+      background: linear-gradient(180deg, #1e88ff, #1765d6);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(30, 88, 200, 0.14);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(35, 48, 72, 0.06);
+      box-shadow: none;
+      font-weight: 600;
+    }
+
+    /* small note */
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      background: #fff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      display: inline-block;
+      max-width: 100%;
+      word-break: break-word;
+      box-sizing: border-box;
+    }
+
+    /* ensure SVG text looks crisp on export */
+    svg {
+      shape-rendering: geometricPrecision;
+      text-rendering: geometricPrecision;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card" id="export-card">
+      <div class="title">
+        <h1>Project Timeline</h1>
+        <p style="color:#3f3e40">Current state is highlighted with a blue dot</p>
+      </div>
+
+      <div class="timeline-wrap" id="timeline-svg-container">
+        <!-- SVG timeline. Adjust width/height below if you want different export size -->
+        <svg id="timeline-svg" xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440"
+          role="img" aria-labelledby="tlTitle tlDesc">
+          <title id="tlTitle">Project timeline</title>
+          <desc id="tlDesc">White timeline with a vertical pale track and four events. First event is active with a
+            filled blue dot.</desc>
+
+          <!-- background -->
+          <rect width="100%" height="100%" fill="#478cbf" />
+
+          <!-- left margin for timeline -->
+          <g transform="translate(84,18)">
+            <!-- vertical track (extended to cover all events) -->
+            <rect x="18" y="12" width="6" height="408" rx="3" fill="#3f3e40" />
+
+            <!-- event group positions (y positions) -->
+            <!-- 1: Proof-Of Concept Physics Sandbox (active) -->
+            <g class="event" transform="translate(0,0)">
+              <!-- connector line from top to circle (rounded) -->
+              <rect x="0" y="12" width="40" height="56" rx="6" fill="transparent" />
+              <!-- active circle (yellow, no outline) -->
+              <circle cx="21" cy="40" r="12" fill="#ffc229" />
+              <!-- glow (yellow, round) -->
+              <circle cx="21" cy="40" r="20" fill="rgba(255,194,41,0.12)" />
+              <!-- text -->
+              <text x="60" y="44" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto" font-size="18"
+                font-weight="700" fill="#ffc229" stroke="#233048" stroke-width="1" paint-order="stroke">
+                Proof-Of-Concept / First-Pass Attempt.
+              </text>
+              <text x="60" y="64" font-family="Inter, system-ui" font-size="13" fill="#fff" stroke="#233048"
+                stroke-width="0.7" paint-order="stroke">
+                <tspan x="60" dy="0">The initial prototype, learning Godot from basically scratch.</tspan>
+                <tspan x="60" dy="18">Any work done here, will likely be fully reworked and/or</tspan>
+                <tspan x="60" dy="18">rewritten when I have a deeper understanding of Godot.</tspan>
+              </text>
+            </g>
+
+            <g class="event" transform="translate(0,96)">
+              <circle cx="21" cy="40" r="10" fill="#d6eaff" />
+              <text x="60" y="44" font-family="Inter, system-ui" font-size="16" fill="#233048"
+                font-weight="600">Experimental Modding Support.</text>
+              <text x="60" y="64" font-family="Inter, system-ui" font-size="13" fill="#233048">
+                <tspan x="60" dy="0">See the limits of resources and pcks for 'mods'.</tspan>
+                <tspan x="60" dy="18">Explore different options, we want something</tspan>
+                <tspan x="60" dy="18">maximally dynamically loadable in-instance..</tspan>
+              </text>
+            </g>
+
+            <g class="event" transform="translate(0,192)">
+              <circle cx="21" cy="40" r="10" fill="#d6eaff" />
+              <text x="60" y="44" font-family="Inter, system-ui" font-size="16" fill="#233048"
+                font-weight="600">Experimental 'Mode' Support.</text>
+              <text x="60" y="64" font-family="Inter, system-ui" font-size="13" fill="#233048">
+                <tspan x="60" dy="0">Modes being a collection of mods x resources.</tspan>
+                <tspan x="60" dy="18">We want to abstract out a standard, base mode</tspan>
+                <tspan x="60" dy="18">that we can easily extend to make whatever.</tspan>
+              </text>
+            </g>
+
+            <g class="event" transform="translate(0,288)">
+              <circle cx="21" cy="40" r="10" fill="#d6eaff" />
+              <text x="60" y="44" font-family="Inter, system-ui" font-size="16" fill="#233048" font-weight="600">Full
+                Rewrite For 0.5+</text>
+              <text x="60" y="64" font-family="Inter, system-ui" font-size="13" fill="#233048">
+                <tspan x="60" dy="0">The long path to 1.x; A full rewrite</tspan>
+                <tspan x="60" dy="18">throwing out all the legacy cruft</tspan>
+                <tspan x="60" dy="18">and actually doing things right.</tspan>
+              </text>
+            </g>
+
+            <!-- subtle decorative top-left card -->
+            <rect x="450" y="25" width="360" height="375" rx="10" fill="#d6eaff" stroke="rgba(20,40,80,0.02)" />
+            <text x="500" y="50" font-size="13" fill="#233048">
+              <tspan x="460" dy="0"></tspan>
+              <tspan x="460" dy="18"></tspan>
+            </text>
+          </g>
+        </svg>
+      </div>
+      <div class="controls" aria-hidden="false">
+        <button id="download-png">Download PNG</button>
+        <button id="download-svg" class="secondary">Download SVG</button>
+      </div>
+    </div>
+
+    <script>
+      /* Utility to download a blob as a file */
+      function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      /* Download SVG as .svg file */
+      document.getElementById('download-svg').addEventListener('click', () => {
+        const svg = document.getElementById('timeline-svg');
+        const serializer = new XMLSerializer();
+        let svgString = serializer.serializeToString(svg);
+
+        // Ensure proper namespace for some browsers
+        if (!svgString.match(/^<svg[^>]+xmlns="http:\/\/www.w3.org\/2000\/svg"/)) {
+          svgString = svgString.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+        }
+        if (!svgString.match(/^<svg[^>]+"http:\/\/www.w3.org\/1999\/xlink"/)) {
+          svgString = svgString.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+        }
+
+        const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        downloadBlob(blob, 'timeline.svg');
+      });
+
+      /* Download PNG by drawing the SVG onto a canvas */
+      document.getElementById('download-png').addEventListener('click', () => {
+        const svg = document.getElementById('timeline-svg');
+        const serializer = new XMLSerializer();
+        const svgString = serializer.serializeToString(svg);
+
+        const svg64 = btoa(unescape(encodeURIComponent(svgString)));
+        const b64Start = 'data:image/svg+xml;base64,';
+        const image = new Image();
+
+        // use devicePixelRatio to create a sharper PNG on high-DPI displays
+        const dpr = window.devicePixelRatio || 1;
+        const width = parseInt(svg.getAttribute('width') || svg.viewBox.baseVal.width) || 808;
+        const height = parseInt(svg.getAttribute('height') || svg.viewBox.baseVal.height) || 360;
+
+        image.onload = function () {
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(width * dpr);
+          canvas.height = Math.round(height * dpr);
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          const ctx = canvas.getContext('2d');
+          // white background
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob(function (blob) {
+            downloadBlob(blob, 'timeline.png');
+          }, 'image/png');
+        };
+
+        image.onerror = function (e) {
+          alert('Could not export PNG. Try downloading SVG instead.');
+          console.error(e);
+        };
+
+        image.src = b64Start + svg64;
+      });
+    </script>
+</body>
+
+</html>
