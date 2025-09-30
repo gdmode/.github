@@ -9,7 +9,14 @@
   <img src="res/banner.png" alt="GDMode Banner.">
 </p>
 
+<details>
+  <summary>⧖ Timeline</summary>
 
-<p align="center">
-  <img src="sets/timeline.png" alt="Timeline.">
-</p>
+  <div align="center">
+    <a href="" target="_blank">
+      <img src="sets/timeline.png" alt="Timeline.">
+    </a>
+  </div>
+
+</details>
+
