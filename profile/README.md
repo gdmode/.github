@@ -20,3 +20,4 @@
 
 </details>
 
+You Can View [Megalisp](https://github.com/megalisp)'s Personal Knowledgebase / Notes / Ideas For The Project [Here](https://megalisp.github.io/vault-gday/index.html)
